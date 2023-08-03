@@ -7,11 +7,12 @@ public class RoundRobinScene implements Scene {
   private Duration period;
   private Date start;
   private int activeLightIndex = 0;
-  private double intensity = 0.1;
+  private double intensity;
 
-  public RoundRobinScene(final LightManager mgr, final Duration period) {
+  public RoundRobinScene(final LightManager mgr, final Duration period, final double intensity) {
     this.mgr = mgr;
     this.period = period;
+    this.intensity = intensity;
   }
 
   @Override()

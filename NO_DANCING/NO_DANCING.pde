@@ -17,7 +17,8 @@ final LightManager lm = new LightManager(this, dmx, numLights);
 
 // scenes
 final Scene ao = new AllOnScene(lm, 0.1);
-final Scene rr = new RoundRobinScene(lm, Duration.ofSeconds(3, 0));
+final Scene rr = new RoundRobinScene(lm, Duration.ofMillis(500), 0.1);
+final Scene oa = new OnAirScene(lm, Duration.ofSeconds(1), 0.1);
 final SceneManager sm = new SceneManager();
 
 void setup()
@@ -28,6 +29,7 @@ void setup()
   lm.setup();
   sm.register(ao);
   sm.register(rr);
+  sm.register(oa);
   sm.shuffle();
   sm.setup();
 
