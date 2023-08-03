@@ -17,14 +17,12 @@ final List<DMXFixture> lights = new ArrayList<DMXFixture>();
 
 final int numLights = 9;
 final int numLightChannels = 6;
-final int numDMXChannels = numLights * numLightChannels;
-
 final int numDmxChannels = numLights * numLightChannels;  // total number of channels allocated for the dmx device, must not be more than 511
 
 void setup()
 {
   // display
-  size( 600, 600 );
+  size( 200, 200, P3D );
 
   // sound
 
@@ -38,7 +36,6 @@ void setup()
   fft.input(in);
 
   // lights
-
 
   // Connect to the first dmx usb device available
   final DMXControl dmx = new DMXControl( 0, numDmxChannels );
@@ -67,10 +64,11 @@ void draw()
   for (int i = 0; i < numBands; i++) {
 
     // The result of the FFT is normalized
-    int power = (int)map(spectrum[i]*8, 0, 1, 0, 255); 
-    final DMXFixture light = lights.get(i); 
+    int power = (int)map(spectrum[i]*8, 0, 1, 0, 128);
+    final DMXFixture light = lights.get(i);
     light.sendValue(1, power);
-  } 
+
+  }
 
   // lights
 }
