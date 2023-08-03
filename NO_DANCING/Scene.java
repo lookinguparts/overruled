@@ -1,7 +1,7 @@
 import java.util.List;
 
 public interface Scene {
-  public void setup(final List<Light> lights);
+  public void setup();
 
   public void draw();
 

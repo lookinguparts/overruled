@@ -1,22 +1,23 @@
+import java.time.Duration;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.jaysonh.dmx4artists.*;
 
-final int numLights = 9;
-final int numLightChannels = 6;
-final int numDMXChannels = numLights * numLightChannels; // total number of channels allocated for the dmx device,
+final int numLights = 3;
+final int numDMXChannels = numLights * Light.NUM_CHANNELS_PER_LIGHT ;  // total number of channels allocated for the dmx device,
                                                           // must not be more than 511
 
 // Connect to the first dmx usb device available
-final DMXControl dmx = new DMXControl(0, numDMXChannels);
+final DMXControl dmx = new DMXControl(0, 511);
 
 // lights
-final LightManager lm = new LightManager(this, dmx, numLights, numLightChannels);
+final LightManager lm = new LightManager(this, dmx, numLights);
 
 // scenes
-final Scene s = new AllOnScene();
+final Scene ao = new AllOnScene(lm, 0.1);
+final Scene rr = new RoundRobinScene(lm, Duration.ofSeconds(3, 0));
 final SceneManager sm = new SceneManager();
 
 void setup()
@@ -25,10 +26,10 @@ void setup()
   size( 200, 200);
 
   lm.setup();
-  sm.register(s);
-  sm.setup(lm.lights());
+  sm.register(ao);
+  sm.register(rr);
   sm.shuffle();
-
+  sm.setup();
 
 }
 

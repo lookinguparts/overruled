@@ -6,9 +6,8 @@ import processing.*;
 import processing.core.PApplet;
 
 public class Light extends DMXFixture {
-  public static final int NUM_LIGHTS = 9; // one for each non-whitespace character
   public static final int NUM_CHANNELS_PER_LIGHT = 6;
-  public static final int CHAN_BRIGHTNES = 1;
+  public static final int CHAN_BRIGHTNESS = 1;
   public static final int CHAN_WARM = 2;
   public static final int CHAN_COOL = 3;
 
@@ -24,7 +23,7 @@ public class Light extends DMXFixture {
 
   public void setBrightness(final double val) {
     float c = map((float)val, 0, 1, 0, 255);
-    this.sendValue(CHAN_BRIGHTNES, c);
+    this.sendValue(CHAN_BRIGHTNESS, c);
   }
 
   public void setWarm(final double val) {

@@ -32,8 +32,8 @@ public class SceneManager implements Scene {
     }
 
     @Override
-    public void setup(final List<Light> lights) {
-        this.getCurrentScene().setup(lights);
+    public void setup() {
+        this.getCurrentScene().setup();
     }
 
     @Override
