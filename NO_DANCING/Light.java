@@ -22,17 +22,17 @@ public class Light extends DMXFixture {
   }
 
   public void setBrightness(final double val) {
-    float c = map((float)val, 0, 1, 0, 255);
+    float c = map((float) val, 0, 1, 0, 255);
     this.sendValue(CHAN_BRIGHTNESS, c);
   }
 
   public void setWarm(final double val) {
-    float c = map((float)val, 0, 1, 0, 255);
+    float c = map((float) val, 0, 1, 0, 255);
     this.sendValue(CHAN_WARM, c);
   }
 
   public void setCool(final double val) {
-    float c = map((float)val, 0, 1, 0, 255);
+    float c = map((float) val, 0, 1, 0, 255);
     this.sendValue(CHAN_COOL, c);
   }
 

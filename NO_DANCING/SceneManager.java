@@ -17,8 +17,11 @@ public class SceneManager implements Scene {
                 this.getCurrentScene().teardown();
                 this.currentScene = scene;
                 this.getCurrentScene().setup();
+                return;
             }
         }
+        throw new RuntimeException("Scene '" + klass.getName() + "' not found. Make sure to register it!");
+
     }
 
     public Scene getCurrentScene() {

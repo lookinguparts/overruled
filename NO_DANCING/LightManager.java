@@ -31,11 +31,23 @@ public class LightManager {
 
     }
 
+    public void setFade(final boolean fade) {
+        this.dmx.setFixtureFade(fade);
+    }
+
+    public void setFadeRate(final float rate) {
+        this.dmx.setFixtureFadeRate(rate);
+    }
+
+    public int getNumLights() {
+        return this.numLights;
+    }
+
     public Light getLight(final int idx) {
         return this.lights.get(idx);
     }
 
-    public List<Light> lights() {
+    public List<Light> getLights() {
         return this.lights;
     }
 
