@@ -11,6 +11,19 @@ public class SceneManager implements Scene {
         return this;
     }
 
+    public <T> void play(Class<T> klass) {
+        for (Scene scene : scenes) {
+            if (scene.getClass() == klass) {
+                this.getCurrentScene().teardown();
+                this.currentScene = scene;
+                this.getCurrentScene().setup();
+                return;
+            }
+        }
+        throw new RuntimeException("Scene '" + klass.getName() + "' not found. Make sure to register it!");
+
+    }
+
     public Scene getCurrentScene() {
         if (this.currentScene == null) {
             if (this.scenes.isEmpty()) {

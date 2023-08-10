@@ -30,8 +30,7 @@ public class RoundRobinScene implements Scene {
     long diffMs = now.getTime() - this.start.getTime();
     if (diffMs > this.period.toMillis()) {
       this.mgr.getLight(this.activeLightIndex).setBrightness(0);
-      this.activeLightIndex = (this.activeLightIndex + 1) % (this.mgr.lights().size());
-      System.out.println(this.activeLightIndex);
+      this.activeLightIndex = (this.activeLightIndex + 1) % (this.mgr.getLights().size());
       this.mgr.getLight(this.activeLightIndex).setBrightness(this.intensity);
       this.start = now;
     }
