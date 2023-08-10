@@ -3,7 +3,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import processing.sound.*;
 import com.jaysonh.dmx4artists.*;
+import ddf.minim.*;
+import ddf.minim.analysis.*;
 
 final int numLights = 3;
 final int numDMXChannels = numLights * Light.NUM_CHANNELS_PER_LIGHT ;  // total number of channels allocated for the dmx device,
@@ -19,6 +22,7 @@ final LightManager lm = new LightManager(this, dmx, numLights);
 final Scene ao = new AllOnScene(lm, 0.1);
 final Scene rr = new RoundRobinScene(lm, Duration.ofMillis(500), 0.1);
 final Scene oa = new OnAirScene(lm, Duration.ofSeconds(1), 0.1);
+final Scene bd = new BeatDetectSceen(this, lm, 0.5);
 final SceneManager sm = new SceneManager();
 
 void setup()
@@ -30,7 +34,8 @@ void setup()
   sm.register(ao);
   sm.register(rr);
   sm.register(oa);
-  sm.shuffle();
+  sm.register(bd);
+  sm.play(BeatDetectSceen.class);
   sm.setup();
 
 }
