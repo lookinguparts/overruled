@@ -42,7 +42,7 @@ void setup()
   sm.register(oa);
   sm.register(bd);
   sm.register(f);
-  sm.play(BeatDetectSceen.class);
+  sm.startShuffle(Duration.ofSeconds(60));
 
   // visualization
   IntStream.range(0, lm.getNumLights()).forEach(idx -> {

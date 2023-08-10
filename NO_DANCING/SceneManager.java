@@ -1,14 +1,36 @@
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SceneManager implements Scene {
     private final List<Scene> scenes = new ArrayList<Scene>();
+
     private Scene currentScene = null;
+    private Timer timer = null;
 
     public SceneManager register(final Scene s) {
         this.scenes.add(s);
         return this;
+    }
+
+    public void startShuffle(final Duration period) {
+        final SceneManager that = this;
+
+        this.timer = new Timer("SceneManagerShuffleTimer", true);
+        this.timer.schedule(new TimerTask() {
+            public void run() {
+                that.playRandom();
+            }
+        }, 0, period.toMillis());
+    }
+
+    public void stopShuffle() {
+        if (this.timer != null) {
+            this.timer.cancel();
+        }
     }
 
     public <T> void play(Class<T> klass) {
@@ -24,6 +46,12 @@ public class SceneManager implements Scene {
 
     }
 
+    public void playRandom() {
+        int randomIndex = new Random().nextInt(this.scenes.size());
+        final Scene nextScene = this.scenes.get(randomIndex);
+        this.play(nextScene.getClass());
+    }
+
     public Scene getCurrentScene() {
         if (this.currentScene == null) {
             if (this.scenes.isEmpty()) {
@@ -36,12 +64,6 @@ public class SceneManager implements Scene {
         }
 
         return this.currentScene;
-    }
-
-    public void shuffle() {
-        int randomIndex = new Random().nextInt(this.scenes.size());
-        final Scene nextScene = this.scenes.get(randomIndex);
-        this.currentScene = nextScene;
     }
 
     @Override
