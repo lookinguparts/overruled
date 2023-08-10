@@ -35,15 +35,16 @@ void setup()
   // display
   size( 440, 200);
 
+  // set up lights and scenes
   lm.setup();
   sm.register(ao);
   sm.register(rr);
   sm.register(oa);
   sm.register(bd);
   sm.register(f);
-  sm.play(OnAirScene.class);
-  sm.setup();
+  sm.play(BeatDetectSceen.class);
 
+  // visualization
   IntStream.range(0, lm.getNumLights()).forEach(idx -> {
     int xPos = 40 + 40 * (idx >= 2 ? idx +1 : idx);
     int yPos = 100;
@@ -58,8 +59,10 @@ void draw()
 {
   // display
   background( 0 );
-  viz.draw();
 
   // lights
   sm.draw();
+
+  // visualization
+  viz.draw();
 }
