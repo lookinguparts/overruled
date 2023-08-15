@@ -14,13 +14,11 @@ final int numDMXChannels = numLights * Light.NUM_CHANNELS_PER_LIGHT;  // total n
                                                           // must not be more than 511
 
 // Connect to the first dmx usb device available
-// final DMXControl dmx = new DMXControl(0, 511);
-final DMXControl dmx = new DMXControl( "EN396804", 128 );
+final DMXControl dmx = new DMXControl( 0, 128 );
 
 // lights
-final float INTENSITY = 1.0;
+final float INTENSITY = 0.05;
 final LightManager lm = new LightManager(this, dmx, numLights);
-final float INTENSITY = 0.2;
 
 // scenes
 final Scene ao = new AllOnScene(lm, INTENSITY);
@@ -28,6 +26,7 @@ final Scene bd = new BeatDetectSceen(this, lm, INTENSITY);
 final Scene f = new FlashScene(this, lm, INTENSITY);
 final Scene oa = new OnAirScene(lm, Duration.ofSeconds(2), INTENSITY);
 final Scene rr = new RoundRobinScene(lm, Duration.ofMillis(200), INTENSITY);
+final Scene as = new AlternatingScene(this, lm, Duration.ofSeconds(1), INTENSITY);
 final SceneManager sm = new SceneManager();
 
 // viz
@@ -45,6 +44,8 @@ void setup()
   sm.register(oa);
   sm.register(bd);
   sm.register(f);
+  sm.register(as);
+  sm.play(AlternatingScene.class);
   sm.startShuffle(Duration.ofSeconds(60));
 
   // visualization
