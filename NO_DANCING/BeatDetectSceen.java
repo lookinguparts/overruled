@@ -35,7 +35,7 @@ public class BeatDetectSceen implements Scene {
     float freq = bps;
     float periodS = 1 / freq;
     float periodMs = periodS * 1000;
-    return (int)periodMs;
+    return (int) periodMs;
   }
 
   @Override()

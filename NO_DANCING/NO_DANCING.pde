@@ -20,13 +20,14 @@ final DMXControl dmx = new DMXControl( "EN396804", 128 );
 // lights
 final float INTENSITY = 1.0;
 final LightManager lm = new LightManager(this, dmx, numLights);
+final float INTENSITY = 0.2;
 
 // scenes
-final Scene ao = new AllOnScene(lm, 0.2);
+final Scene ao = new AllOnScene(lm, INTENSITY);
+final Scene bd = new BeatDetectSceen(this, lm, INTENSITY);
+final Scene f = new FlashScene(this, lm, INTENSITY);
+final Scene oa = new OnAirScene(lm, Duration.ofSeconds(2), INTENSITY);
 final Scene rr = new RoundRobinScene(lm, Duration.ofMillis(200), INTENSITY);
-final Scene oa = new OnAirScene(lm, Duration.ofSeconds(1), INTENSITY);
-final Scene bd = new BeatDetectSceen(this, lm, 0.5);
-final Scene f = new FlashScene(this, lm, 0.5);
 final SceneManager sm = new SceneManager();
 
 // viz
@@ -35,7 +36,7 @@ final Visualiser viz = new Visualiser();
 void setup()
 {
   // display
-  size( 440, 200);
+  size(440, 200);
 
   // set up lights and scenes
   lm.setup();

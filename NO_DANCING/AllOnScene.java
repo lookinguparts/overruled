@@ -11,6 +11,8 @@ public class AllOnScene implements Scene {
   @Override()
   public void setup() {
     this.mgr.setBrightness(this.intensity);
+    this.mgr.setCool(this.intensity);
+    this.mgr.setWarm(intensity);
   }
 
   @Override()
