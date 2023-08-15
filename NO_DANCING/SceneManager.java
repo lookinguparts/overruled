@@ -39,6 +39,7 @@ public class SceneManager implements Scene {
                 this.getCurrentScene().teardown();
                 this.currentScene = scene;
                 this.getCurrentScene().setup();
+                System.out.println("Playing scene '" + klass.getName() + "'");
                 return;
             }
         }
