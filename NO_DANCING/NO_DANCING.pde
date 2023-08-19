@@ -17,13 +17,14 @@ final int numDMXChannels = numLights * Light.NUM_CHANNELS_PER_LIGHT;  // total n
 final DMXControl dmx = new DMXControl( 0, 128 );
 
 // lights
-final float INTENSITY = 0.05;
+final float INTENSITY = 0.9;
 final LightManager lm = new LightManager(this, dmx, numLights);
 
 // scenes
 final Scene ao = new AllOnScene(lm, INTENSITY);
 final Scene bd = new BeatDetectSceen(this, lm, INTENSITY);
 final Scene f = new FlashScene(this, lm, INTENSITY);
+final Scene fs = new FlickerScene(this, lm, INTENSITY);
 final Scene ss = new StrobeScene(this, lm, Duration.ofSeconds(5), INTENSITY);
 final Scene oa = new OnAirScene(lm, Duration.ofSeconds(2), INTENSITY);
 final Scene rr = new RoundRobinScene(lm, Duration.ofMillis(200), INTENSITY);
@@ -45,10 +46,11 @@ void setup()
   sm.register(oa);
   sm.register(bd);
   sm.register(f);
+  sm.register(fs);
   sm.register(ss);
   sm.register(as);
-  // sm.play(BeatDetectSceen.class);
-  sm.startShuffle(Duration.ofSeconds(5));
+  sm.play(FlickerScene.class);
+  // sm.startShuffle(Duration.ofSeconds(5));
 
   // visualization
   IntStream.range(0, lm.getNumLights()).forEach(idx -> {
