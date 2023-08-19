@@ -13,21 +13,17 @@ public class BeatDetectSceen implements Scene {
   private LightManager mgr;
   private final double intensity;
   private final Minim minim;
-  private final BeatDetect beat;
-  private final AudioInput in;
   private final int numBands = 16;
   private final float levelScale = (float) 1.0;
   private final float minLevel = (float) 1.0;
+
+  private BeatDetect beat;
+  private AudioInput in;
 
   public BeatDetectSceen(final PApplet app, final LightManager mgr, final double intensity) {
     this.mgr = mgr;
     this.intensity = intensity;
     this.minim = new Minim(app);
-    this.in = minim.getLineIn(Minim.STEREO);
-    this.beat = new BeatDetect(in.bufferSize(), in.sampleRate());
-    this.beat.setSensitivity(this.BPMToMs(110)); // ms
-    this.beat.detectMode(BeatDetect.FREQ_ENERGY);
-    final BeatListener bl = new BeatListener(beat, in);
   }
 
   protected int BPMToMs(int bpm) {
@@ -40,6 +36,12 @@ public class BeatDetectSceen implements Scene {
 
   @Override()
   public void setup() {
+    this.in = minim.getLineIn(Minim.STEREO);
+    this.beat = new BeatDetect(in.bufferSize(), in.sampleRate());
+    this.beat.setSensitivity(this.BPMToMs(110)); // ms
+    this.beat.detectMode(BeatDetect.FREQ_ENERGY);
+    final BeatListener bl = new BeatListener(beat, in);
+
     this.mgr.setBrightness(this.intensity);
   }
 

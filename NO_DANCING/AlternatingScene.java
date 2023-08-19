@@ -20,7 +20,6 @@ public class AlternatingScene implements Scene {
 
     @Override()
     public void setup() {
-
         isNo = true;
         last = new Date();
     }

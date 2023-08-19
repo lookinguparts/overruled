@@ -45,7 +45,7 @@ void setup()
   sm.register(bd);
   sm.register(f);
   sm.register(as);
-  sm.play(AlternatingScene.class);
+  // sm.play(BeatDetectSceen.class);
   sm.startShuffle(Duration.ofSeconds(60));
 
   // visualization

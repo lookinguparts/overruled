@@ -36,15 +36,23 @@ public class SceneManager implements Scene {
     public <T> void play(Class<T> klass) {
         for (Scene scene : scenes) {
             if (scene.getClass() == klass) {
-                this.getCurrentScene().teardown();
+                try {
+                    this.getCurrentScene().teardown();
+                } catch(final Exception e){
+                    System.out.println("Error tearing down '" + klass.getName() + "'; skipping");
+                }
                 this.currentScene = scene;
-                this.getCurrentScene().setup();
-                System.out.println("Playing scene '" + klass.getName() + "'");
-                return;
+                try {
+                    this.getCurrentScene().setup();
+                    System.out.println("Playing scene '" + klass.getName() + "'");
+                    return;
+                } catch(final Exception e){
+                    System.out.println("Error setting up '" + klass.getName() + "'; skipping");
+                }
             }
         }
-        throw new RuntimeException("Scene '" + klass.getName() + "' not found. Make sure to register it!");
-
+        System.out.println("Could not start'" + klass.getName() + "'; playing random scene...");
+        this.playRandom();
     }
 
     public void playRandom() {
