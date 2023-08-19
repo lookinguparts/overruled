@@ -24,6 +24,7 @@ final LightManager lm = new LightManager(this, dmx, numLights);
 final Scene ao = new AllOnScene(lm, INTENSITY);
 final Scene bd = new BeatDetectSceen(this, lm, INTENSITY);
 final Scene f = new FlashScene(this, lm, INTENSITY);
+final Scene ss = new StrobeScene(this, lm, Duration.ofSeconds(5), INTENSITY);
 final Scene oa = new OnAirScene(lm, Duration.ofSeconds(2), INTENSITY);
 final Scene rr = new RoundRobinScene(lm, Duration.ofMillis(200), INTENSITY);
 final Scene as = new AlternatingScene(this, lm, Duration.ofSeconds(1), INTENSITY);
@@ -44,9 +45,10 @@ void setup()
   sm.register(oa);
   sm.register(bd);
   sm.register(f);
+  sm.register(ss);
   sm.register(as);
   // sm.play(BeatDetectSceen.class);
-  sm.startShuffle(Duration.ofSeconds(60));
+  sm.startShuffle(Duration.ofSeconds(5));
 
   // visualization
   IntStream.range(0, lm.getNumLights()).forEach(idx -> {
@@ -65,7 +67,12 @@ void draw()
   background( 0 );
 
   // lights
+  try {
   sm.draw();
+
+  } catch (final Exception e){
+    System.out.println("Error executing '" + sm.getCurrentScene().getClass().getName() + "'; playing random scene...");
+  }
 
   // visualization
   viz.draw();

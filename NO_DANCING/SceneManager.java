@@ -37,12 +37,14 @@ public class SceneManager implements Scene {
         for (Scene scene : scenes) {
             if (scene.getClass() == klass) {
                 try {
+                    System.out.println("Tearing down '" + getCurrentScene().getClass().getName() + "'...");
                     this.getCurrentScene().teardown();
                 } catch(final Exception e){
-                    System.out.println("Error tearing down '" + klass.getName() + "'; skipping");
+                    System.out.println("Error tearing down '" + getCurrentScene().getClass().getName() + "'; skipping");
                 }
                 this.currentScene = scene;
                 try {
+                    System.out.println("Setting up scene '" + klass.getName() + "'...");
                     this.getCurrentScene().setup();
                     System.out.println("Playing scene '" + klass.getName() + "'");
                     return;
