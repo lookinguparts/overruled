@@ -23,12 +23,18 @@ final LightManager lm = new LightManager(this, dmx, numLights);
 // scenes
 final Scene ao = new AllOnScene(lm, INTENSITY);
 final Scene bd = new BeatDetectSceen(this, lm, INTENSITY);
-final Scene f = new FlashScene(this, lm, INTENSITY);
+final Scene fl = new FlashScene(this, lm, INTENSITY);
 final Scene fs = new FlickerScene(this, lm, INTENSITY);
 final Scene ss = new StrobeScene(this, lm, Duration.ofSeconds(3), INTENSITY);
 final Scene oa = new OnAirScene(lm, Duration.ofSeconds(2), INTENSITY);
-final Scene rr = new RoundRobinScene(lm, Duration.ofSeconds(1), INTENSITY);
+// Turin each light on/off from left to right
+final Scene rr = new RoundRobinScene(lm, Duration.ofMillis(200), INTENSITY);
+// Alternate fliping the lights on the words "NO" and "DANCING" on/off
 final Scene as = new AlternatingScene(this, lm, Duration.ofSeconds(1), INTENSITY);
+// Oscillates lights brightness from left ro right in a sine wave
+final Scene sw = new SineWaveScene(this, lm, Duration.ofSeconds(1));
+
+// scence manager
 final SceneManager sm = new SceneManager();
 
 // viz
@@ -42,15 +48,15 @@ void setup()
   // set up lights and scenes
   lm.setup();
   sm.register(ao);
-  sm.register(rr);
-  sm.register(oa);
-  sm.register(bd);
-  sm.register(f);
-  sm.register(fs);
-  sm.register(ss);
   sm.register(as);
-  // sm.play(BeatDetectSceen.class);
-  sm.startShuffle(Duration.ofSeconds(5));
+  sm.register(bd);
+  sm.register(fl);
+  sm.register(fs);
+  sm.register(oa);
+  sm.register(rr);
+  sm.register(ss);
+  sm.register(sw);
+  sm.startShuffle(SineWaveScene.class);
 
   // visualization
   IntStream.range(0, lm.getNumLights()).forEach(idx -> {
