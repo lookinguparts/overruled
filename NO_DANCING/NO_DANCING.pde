@@ -54,8 +54,8 @@ void setup()
   sm.register(rr);
   sm.register(ss);
   sm.register(sw);
-  // sm.startShuffle(Duration.ofSeconds(60));
-  sm.play(SineWaveScene.class);
+  sm.startShuffle(shufflePeriod);
+  // sm.play(SineWaveScene.class); // to test a specific scene
 
   // visualization
   IntStream.range(0, lm.getNumLights()).forEach(idx -> {
