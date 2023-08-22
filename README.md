@@ -14,7 +14,7 @@ The project is [ currently ] implemented in [Processing](https://processing.org)
 ## Running Interactively
 
 ```console
-$ find . | entr -c -n -r processing-java --sketch="$PWD/NO_DANCING --run
+$ find . | entr -c -n -r processing-java --sketch="$PWD/NO_DANCING" --run
 ```
 
 ## TODO
