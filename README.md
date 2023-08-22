@@ -17,6 +17,13 @@ The project is [ currently ] implemented in [Processing](https://processing.org)
 $ find . | entr -c -n -r processing-java --sketch="$PWD/NO_DANCING" --run
 ```
 
+## Run in the Simulator
+- Open `/Processing_Light_Simulator` in processing
+- Use the LightManager and Light to simluate DMX controller
+- Use the processing `setup()` and `draw()` methods
+- Will run a visual of the lights with a black background
+- Minor porting needed to run using actual lights see `SineLights.pde` and `SineWaveScene.java` for comparison
+
 ## TODO
 - [ ] build script
 - [ ] better beat detect
