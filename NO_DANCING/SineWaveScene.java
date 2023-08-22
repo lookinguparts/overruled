@@ -20,7 +20,7 @@ public class SineWaveScene implements Scene {
         this.intensity = intensity;
         // Set the minimum brightness level that the lights can reach during their
         // oscillation.
-        this.minIntensity = .33f;
+        this.minIntensity = .5f;
 
         this.frequency = 1.0f / period.toSeconds();
     }
