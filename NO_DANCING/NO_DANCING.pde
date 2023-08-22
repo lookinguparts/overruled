@@ -23,17 +23,14 @@ final LightManager lm = new LightManager(this, dmx, numLights);
 
 // scenes
 final Scene ao = new AllOnScene(lm, INTENSITY);
+final Scene as = new AlternatingScene(this, lm, Duration.ofMillis(2000), INTENSITY); // Alternate fliping the lights on the words "NO" and "DANCING" on/off
 final Scene bd = new BeatDetectSceen(this, lm, INTENSITY);
 final Scene fl = new FlashScene(this, lm, INTENSITY);
 final Scene fs = new FlickerScene(this, lm, INTENSITY);
-final Scene ss = new StrobeScene(this, lm, Duration.ofSeconds(3), INTENSITY);
 final Scene oa = new OnAirScene(lm, Duration.ofSeconds(2), INTENSITY);
-// Turin each light on/off from left to right
-final Scene rr = new RoundRobinScene(lm, Duration.ofMillis(200), INTENSITY);
-// Alternate fliping the lights on the words "NO" and "DANCING" on/off
-final Scene as = new AlternatingScene(this, lm, Duration.ofSeconds(1), INTENSITY);
-// Oscillates lights brightness from left ro right in a sine wave
-final Scene sw = new SineWaveScene(this, lm, Duration.ofMillis(333), INTENSITY);
+final Scene rr = new RoundRobinScene(lm, Duration.ofMillis(1000), INTENSITY); // Turin each light on/off from left to right
+final Scene ss = new StrobeScene(this, lm, Duration.ofSeconds(2), INTENSITY);
+final Scene sw = new SineWaveScene(this, lm, Duration.ofMillis(6000), INTENSITY); // Oscillates lights brightness from left ro right in a sine wave
 
 // scence manager
 final SceneManager sm = new SceneManager();

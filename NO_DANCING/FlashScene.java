@@ -12,7 +12,7 @@ public class FlashScene implements Scene {
         this.mgr = mgr;
         this.intensity = intensity;
         this.flashParam = new DMXParamOsc(app,
-                (float) .5, // oscillate over 10 seconds
+                (float) 5, // oscillate over 5 seconds
                 0, // min dmx value
                 (int) (255 * intensity), // max dmx value
                 MoveBehaviour.OSC_LINEAR, // This is the type of movement, OSC_SINE means follow a sin function over
