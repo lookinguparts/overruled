@@ -32,7 +32,7 @@ final Scene rr = new RoundRobinScene(lm, Duration.ofMillis(200), INTENSITY);
 // Alternate fliping the lights on the words "NO" and "DANCING" on/off
 final Scene as = new AlternatingScene(this, lm, Duration.ofSeconds(1), INTENSITY);
 // Oscillates lights brightness from left ro right in a sine wave
-final Scene sw = new SineWaveScene(this, lm, Duration.ofSeconds(1));
+final Scene sw = new SineWaveScene(this, lm, Duration.ofMillis(333), INTENSITY);
 
 // scence manager
 final SceneManager sm = new SceneManager();
@@ -56,7 +56,8 @@ void setup()
   sm.register(rr);
   sm.register(ss);
   sm.register(sw);
-  sm.startShuffle(SineWaveScene.class);
+  // sm.startShuffle(Duration.ofSeconds(60));
+  sm.play(SineWaveScene.class);
 
   // visualization
   IntStream.range(0, lm.getNumLights()).forEach(idx -> {
