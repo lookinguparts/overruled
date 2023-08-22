@@ -24,7 +24,7 @@ final LightManager lm = new LightManager(this, dmx, numLights);
 // scenes
 final Scene ao = new AllOnScene(lm, INTENSITY);
 final Scene as = new AlternatingScene(this, lm, Duration.ofMillis(2000), INTENSITY); // Alternate fliping the lights on the words "NO" and "DANCING" on/off
-final Scene bd = new BeatDetectSceen(this, lm, INTENSITY);
+// final Scene bd = new BeatDetectSceen(this, lm, INTENSITY);
 final Scene fl = new FlashScene(this, lm, INTENSITY);
 final Scene fs = new FlickerScene(this, lm, INTENSITY);
 final Scene oa = new OnAirScene(lm, Duration.ofSeconds(2), INTENSITY);
@@ -47,7 +47,7 @@ void setup()
   lm.setup();
   sm.register(ao);
   sm.register(as);
-  sm.register(bd);
+  // sm.register(bd);
   sm.register(fl);
   sm.register(fs);
   sm.register(oa);
