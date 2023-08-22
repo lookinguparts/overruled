@@ -12,6 +12,7 @@ import ddf.minim.analysis.*;
 final int numLights = 9;
 final int numDMXChannels = numLights * Light.NUM_CHANNELS_PER_LIGHT;  // total number of channels allocated for the dmx device,
                                                           // must not be more than 511
+final Duration shufflePeriod = Duration.ofSeconds(60);  // seconds
 
 // Connect to the first dmx usb device available
 final DMXControl dmx = new DMXControl( 0, 128 );
@@ -77,10 +78,9 @@ void draw()
 
   // lights
   try {
-  sm.draw();
-
+    sm.draw();
   } catch (final Exception e){
-    System.out.println("Error executing '" + sm.getCurrentScene().getClass().getName() + "'; playing random scene...");
+    System.out.println("Error executing '" + sm.getCurrentScene().getClass().getName() + "': " + e.getMessage());
   }
 
   // visualization

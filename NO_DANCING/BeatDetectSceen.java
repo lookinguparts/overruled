@@ -51,7 +51,7 @@ public class BeatDetectSceen implements Scene {
     int size = this.beat.detectSize();
     for (int idx = 0; idx < size; idx++) {
 
-      float freq = this.beat.getDetectCenterFrequency(idx);
+      final float freq = this.beat.getDetectCenterFrequency(idx);
 
       if (this.beat.isRange(0, 3, 2)) {
         this.mgr.getLight(0).setBrightness(this.intensity);
